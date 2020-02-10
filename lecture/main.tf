@@ -12,3 +12,8 @@ module "container" {
   ext_port = lookup(var.ext_port, var.env)
 }
 
+resource "null_resource" "container_info" {
+  provisioner "local-exec" {
+    command = "echo ${module.container.container_name}:${module.container.ip} >> container.txt"
+  }
+}
